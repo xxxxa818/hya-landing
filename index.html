@@ -3,59 +3,73 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>hya.loc.cc</title>
-<meta name="description" content="hya.loc.cc — 你好，这里是 hya 的小站。">
+<title>Douglas · 个人主页</title>
+<meta name="description" content="Douglas 的个人小站 — hya.loc.cc">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
     background: #fafafa;
     color: #1a1a1a;
-    text-align: center;
-    padding: 2rem 1.5rem;
-  }
-  h1 {
-    font-size: clamp(3.5rem, 12vw, 6rem);
-    font-weight: 800;
-    letter-spacing: -0.03em;
-    line-height: 1;
-  }
-  .domain {
-    margin-top: 1rem;
-    font-size: 1.1rem;
-    letter-spacing: 0.2em;
-    color: #666;
-  }
-  .line {
-    width: 3rem;
-    height: 2px;
-    background: #1a1a1a;
-    margin: 2rem auto;
-  }
-  p {
-    font-size: 1.05rem;
-    color: #444;
     line-height: 1.8;
+    padding: 4rem 1.5rem 3rem;
   }
+  main { max-width: 620px; margin: 0 auto; }
+  header { margin-bottom: 3rem; }
+  h1 {
+    font-size: clamp(2.5rem, 8vw, 3.5rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+  .tagline { margin-top: 0.75rem; font-size: 1.05rem; color: #666; }
+  section { margin-bottom: 2.5rem; }
+  h2 {
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    color: #999;
+    margin-bottom: 0.75rem;
+  }
+  p { color: #333; }
+  a { color: #1a1a1a; text-decoration: underline; text-underline-offset: 3px; }
+  a:hover { color: #555; }
+  .links { list-style: none; }
+  .links li { padding: 0.6rem 0; border-bottom: 1px solid #eee; }
+  .links li:last-child { border-bottom: none; }
+  .links .label { color: #999; font-size: 0.9rem; margin-right: 0.75rem; }
   footer {
-    position: fixed;
-    bottom: 1.5rem;
+    margin-top: 4rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #eee;
     font-size: 0.8rem;
     color: #aaa;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.05em;
   }
 </style>
 </head>
 <body>
-  <h1>hya</h1>
-  <div class="domain">hya.loc.cc</div>
-  <div class="line"></div>
-  <p>你好，这里是 hya 的小站。<br>Hello, this is hya.</p>
-  <footer>Built with GitHub Pages</footer>
+  <main>
+    <header>
+      <h1>Douglas</h1>
+      <p class="tagline">热爱折腾，把想法变成现实。</p>
+    </header>
+
+    <section>
+      <h2>关于 / ABOUT</h2>
+      <p>你好，我是 Douglas。这里是我的个人小站，简单干净，慢慢来。</p>
+      <p>Hello, I'm Douglas. This is my little corner of the web.</p>
+    </section>
+
+    <section>
+      <h2>链接 / LINKS</h2>
+      <ul class="links">
+        <li><span class="label">GitHub</span><a href="https://github.com/xxxxa818">github.com/xxxxa818</a></li>
+        <li><span class="label">本站</span><a href="https://hya.loc.cc/">hya.loc.cc</a></li>
+      </ul>
+    </section>
+
+    <footer>© 2026 Douglas · Built with GitHub Pages</footer>
+  </main>
 </body>
 </html>
