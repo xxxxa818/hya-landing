@@ -168,60 +168,6 @@
     line-height: 1.7;
   }
 
-  /* 工具卡片 */
-  .card {
-    background: var(--card);
-    backdrop-filter: blur(10px);
-    border: 1px solid var(--line);
-    border-radius: 18px;
-    padding: 1.4rem 1.4rem 1.6rem;
-    margin-bottom: 1rem;
-    box-shadow: var(--shadow);
-  }
-  .card h3 { font-size: 1.05rem; margin-bottom: 0.25rem; }
-  .card .desc { font-size: 0.9rem; color: var(--muted); margin-bottom: 1rem; }
-  .row { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; margin-bottom: 0.75rem; }
-  .row label { font-size: 0.9rem; color: var(--muted); }
-  input[type="text"], input[type="number"] {
-    background: var(--card-solid);
-    color: var(--fg);
-    border: 1px solid var(--line);
-    border-radius: 10px;
-    padding: 0.55rem 0.8rem;
-    font-size: 0.95rem;
-    flex: 1;
-    min-width: 0;
-  }
-  input[type="range"] { flex: 1; accent-color: var(--accent2); }
-  .btn {
-    background: linear-gradient(90deg, var(--accent1), var(--accent2));
-    color: #fff;
-    border: none;
-    border-radius: 10px;
-    padding: 0.55rem 1.1rem;
-    font-size: 0.9rem;
-    cursor: pointer;
-    white-space: nowrap;
-    font-weight: 600;
-  }
-  .btn.ghost {
-    background: transparent;
-    color: var(--fg);
-    border: 1px solid var(--line);
-    font-weight: 500;
-  }
-  .output {
-    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-    font-size: 0.95rem;
-    word-break: break-all;
-    background: var(--card-solid);
-    border: 1px solid var(--line);
-    border-radius: 10px;
-    padding: 0.65rem 0.8rem;
-    min-height: 2.7rem;
-  }
-  .hint { font-size: 0.8rem; color: var(--faint); margin-top: 0.5rem; }
-
   .links { list-style: none; }
   .links li {
     display: flex;
@@ -290,47 +236,12 @@
         </div>
         <div class="future-card">
           <div class="icon">🧰</div>
-          <h3>更多小工具</h3>
-          <p>下面那两个只是开始，顺手好用的还会继续加。</p>
-          <span class="soon">持续更新</span>
+          <h3>小工具</h3>
+          <p>以后想到顺手好用的，就做出来放在这里。</p>
+          <span class="soon">敬请期待</span>
         </div>
       </div>
       <p class="future-note">小站刚搭好，还是一张白纸。<br>你现在看到的，是它最开始的样子。</p>
-    </section>
-
-    <section>
-      <h2>已经有的小东西 / TOOLS</h2>
-
-      <div class="card">
-        <h3>随机密码生成器</h3>
-        <p class="desc">纯本地生成，密码不会离开你的浏览器。</p>
-        <div class="row">
-          <label>长度 <span id="lenVal">16</span></label>
-          <input type="range" id="pwLen" min="8" max="32" value="16">
-        </div>
-        <div class="row">
-          <label><input type="checkbox" id="pwUpper" checked> 大写字母</label>
-          <label><input type="checkbox" id="pwNum" checked> 数字</label>
-          <label><input type="checkbox" id="pwSym" checked> 符号</label>
-        </div>
-        <div class="row">
-          <button class="btn" id="pwGen" type="button">生成</button>
-          <button class="btn ghost" id="pwCopy" type="button">复制</button>
-        </div>
-        <div class="output" id="pwOut"></div>
-      </div>
-
-      <div class="card">
-        <h3>时间戳转换</h3>
-        <p class="desc">Unix 时间戳（秒）和日期互转。</p>
-        <div class="row">
-          <input type="text" id="tsIn" placeholder="例如 1763400000" inputmode="numeric">
-          <button class="btn" id="tsNow" type="button">现在</button>
-          <button class="btn" id="tsGo" type="button">转换</button>
-        </div>
-        <div class="output" id="tsOut"></div>
-        <p class="hint">支持 10 位秒级时间戳，也支持 13 位毫秒级。</p>
-      </div>
     </section>
 
     <section>
@@ -377,66 +288,6 @@
     }
     tick();
     setInterval(tick, 1000);
-  })();
-
-  // 随机密码生成器
-  (function () {
-    var lenInput = document.getElementById('pwLen');
-    var lenVal = document.getElementById('lenVal');
-    var out = document.getElementById('pwOut');
-    lenInput.addEventListener('input', function () { lenVal.textContent = lenInput.value; });
-    function gen() {
-      var len = parseInt(lenInput.value, 10);
-      var chars = 'abcdefghijklmnopqrstuvwxyz';
-      if (document.getElementById('pwUpper').checked) chars += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-      if (document.getElementById('pwNum').checked) chars += '0123456789';
-      if (document.getElementById('pwSym').checked) chars += '!@#$%^&*()-_=+[]{}<>?';
-      var buf = new Uint32Array(len);
-      window.crypto.getRandomValues(buf);
-      var pw = '';
-      for (var i = 0; i < len; i++) pw += chars[buf[i] % chars.length];
-      out.textContent = pw;
-    }
-    document.getElementById('pwGen').addEventListener('click', gen);
-    document.getElementById('pwCopy').addEventListener('click', function () {
-      var text = out.textContent;
-      if (!text) return;
-      function fallback() {
-        var ta = document.createElement('textarea');
-        ta.value = text;
-        document.body.appendChild(ta);
-        ta.select();
-        try { document.execCommand('copy'); } catch (e) {}
-        document.body.removeChild(ta);
-      }
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(text).catch(fallback);
-      } else {
-        fallback();
-      }
-    });
-    gen();
-  })();
-
-  // 时间戳转换
-  (function () {
-    var input = document.getElementById('tsIn');
-    var out = document.getElementById('tsOut');
-    function convert() {
-      var v = input.value.trim();
-      if (!/^\d+$/.test(v)) { out.textContent = '请输入纯数字时间戳'; return; }
-      var ms = v.length >= 13 ? parseInt(v, 10) : parseInt(v, 10) * 1000;
-      var d = new Date(ms);
-      if (isNaN(d.getTime())) { out.textContent = '时间戳无效'; return; }
-      out.textContent = d.toLocaleString('zh-CN', { timeZone: 'Asia/Shanghai', hour12: false }) +
-        '（北京时间） / ' + d.toISOString();
-    }
-    document.getElementById('tsGo').addEventListener('click', convert);
-    document.getElementById('tsNow').addEventListener('click', function () {
-      input.value = Math.floor(Date.now() / 1000);
-      convert();
-    });
-    input.addEventListener('keydown', function (e) { if (e.key === 'Enter') convert(); });
   })();
 </script>
 </body>
